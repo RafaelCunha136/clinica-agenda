@@ -11,7 +11,7 @@ import json
 # Acessa o site e faz login usando credenciais - *** IMPLEMENTAR GUI PARA DEMAIS USUÁRIOS ***
 
 driver = webdriver.Chrome()
-driver.get("URL")
+driver.get("url")
 
 wait = WebDriverWait(driver, 15)
 
@@ -19,8 +19,8 @@ email_input = wait.until(EC.presence_of_element_located((By.NAME, "identity")))
 password_input = wait.until(
     EC.presence_of_element_located((By.NAME, "password")))
 
-email_input.send_keys("EMAIL")
-password_input.send_keys("PASSWORD")
+email_input.send_keys("email")
+password_input.send_keys("password")
 password_input.send_keys(Keys.RETURN)
 
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
@@ -35,7 +35,7 @@ for cookie in selenium_cookies:
     session.cookies.set(cookie['name'], cookie['value'])
 
 # Consume API da agenda
-agenda_url = "URL AGENDA"
+agenda_url = "url-agenda"
 response = session.get(agenda_url)
 data = response.json()
 
@@ -75,5 +75,5 @@ df_sorted = df.sort_values(by=["Nome", "Data"], ascending=[True, True])
 df_sorted["Data"] = df_sorted["Data"].dt.strftime("%d/%m/%Y")
 
 # Exporta para Excel
-df_sorted.to_excel("agenda_setembro_aline_yoshida.xlsx", index=False)
+df_sorted.to_excel("agenda_setembro.xlsx", index=False)
 print("Arquivo gerado com sucesso!")
