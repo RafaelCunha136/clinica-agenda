@@ -1,17 +1,27 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from dotenv import load_dotenv
 import requests
 import pandas as pd
 import json
 
+# Variáveis de ambiente
 
-# Acessa o site e faz login usando credenciais - *** IMPLEMENTAR GUI PARA DEMAIS USUÁRIOS ***
+load_dotenv()
+
+URL = os.getenv('URL')
+USER_MAIL = os.getenv('USER_MAIL')
+PASSWORD = os.getenv('PASSWORD')
+URL_AGENDA = os.getenv('URL_AGENDA')
+
+# Acessa o site e faz login usando variáveis de ambiente - *** IMPLEMENTAR GUI PARA DEMAIS USUÁRIOS ***
 
 driver = webdriver.Chrome()
-driver.get("url")
+driver.get(URL)
 
 wait = WebDriverWait(driver, 15)
 
@@ -19,8 +29,8 @@ email_input = wait.until(EC.presence_of_element_located((By.NAME, "identity")))
 password_input = wait.until(
     EC.presence_of_element_located((By.NAME, "password")))
 
-email_input.send_keys("email")
-password_input.send_keys("password")
+email_input.send_keys(USER_MAIL)
+password_input.send_keys(PASSWORD)
 password_input.send_keys(Keys.RETURN)
 
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "body")))
@@ -35,7 +45,7 @@ for cookie in selenium_cookies:
     session.cookies.set(cookie['name'], cookie['value'])
 
 # Consume API da agenda
-agenda_url = "url-agenda"
+agenda_url = URL_AGENDA
 response = session.get(agenda_url)
 data = response.json()
 
@@ -75,5 +85,5 @@ df_sorted = df.sort_values(by=["Nome", "Data"], ascending=[True, True])
 df_sorted["Data"] = df_sorted["Data"].dt.strftime("%d/%m/%Y")
 
 # Exporta para Excel
-df_sorted.to_excel("agenda_setembro.xlsx", index=False)
+df_sorted.to_excel(f"agenda_setembro.xlsx", index=False)
 print("Arquivo gerado com sucesso!")
