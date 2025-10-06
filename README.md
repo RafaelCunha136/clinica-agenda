@@ -20,18 +20,18 @@ Em resumo, este projeto:
 - Conexão direta com a API da Clínica  
 - Filtro por intervalo de datas  
 - Retorno em DataFrame  
-- Exportação já formatada para arquivos CSV/Excel  
+- Exportação já formatada para arquivos CSV/Excel
+- Interface gráfica para autenticar, selecionar o período e gerar o arquivo  
 
 # Status do Projeto
 
 Atualmente em versão inicial, com foco em consumo de dados da agenda
 
 Possíveis atualizações futuras:
-- GUI para autenticação e seleção de período  
+- GUI para autenticação e seleção de período - DONE!
 - Suporte a outros endpoints  
 - Integração com dashboards
 
-
 # TODO
 
-- GUI para autenticação e seleção de período
+- GUI para autenticação e seleção de período - DONE!
